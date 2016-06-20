@@ -8,3 +8,8 @@ from django.template import Context, loader
 def index (request):
     template = loader.get_template("game/template/index.html")
     return HttpResponse(template.render())
+
+def addGame(request):
+	username = request.POST['player_name']
+	gridsize = request.POST['grid_size']
+	print (gridsize)

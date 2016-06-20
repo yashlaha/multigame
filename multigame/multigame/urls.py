@@ -21,4 +21,5 @@ from game import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^game/', views.index),
+    url(r'^adddata/', views.addGame),
 ]

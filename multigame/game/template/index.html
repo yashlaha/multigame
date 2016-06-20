@@ -33,6 +33,7 @@
 
 <body>
 
+
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
@@ -102,24 +103,27 @@
           <h4>Start A New Game</h4>
         </div>
         <div class="modal-body">
+        <form action = "/adddata/" method= "POST">
+            
             <h4> Enter your name : </h4>
-            <input type = "text" class = "form-control"id="playername">
+            <input type = "text" class = "form-control" name="player_name">
         </div>
         <div class="modal-body">
           <h4>Select Grid Size : </h4>
           <label>
-            <input type="radio" value="4" name="gridsize" />4 X 4</label>
+            <input type="radio" value="4" name="grid_size" />4 X 4</label>
         <br>
           <label>
-            <input type="radio" value="5" name="gridsize" />5 X 5</label>
+            <input type="radio" value="5" name="grid_size" />5 X 5</label>
         <br>
           <label>
-            <input type="radio" value="6" name="gridsize" />6 X 6</label>
+            <input type="radio" value="6" name="grid_size" />6 X 6</label>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-lg" >Start Game</button>
+          <button type="submit" class="btn btn-default btn-lg" >Start Game</button>
           <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
         </div>
+        </form>
       </div>
       
     </div>
