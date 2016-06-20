@@ -1,0 +1,15 @@
+.modal-header{
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-weight: 700!important;
+    background-color: #030203;
+    color:white; 
+}
+.modal-footer{
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-weight: 700!important;
+    color:white;	
+}
+.modal-content{
+	font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif!important;
+    font-weight: 700!important;
+}
