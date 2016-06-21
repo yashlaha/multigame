@@ -18,6 +18,7 @@
     <!-- Custom CSS -->
     <link href="{% static "css/landing-page.css" %}" rel="stylesheet">
     <link href="{% static "css/game-page.css" %}" rel="stylesheet">
+    <link href="{% static "css/wait-page.css" %}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -72,12 +73,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <div id="loading">
-                        <h4>Waiting for users to Join your Game</h4>
-                        </div>
-                        <div id="loading_image">
-                        <img src="{% static "img/loading.gif" %}">
-                        </div>
+                        <div id="loading" class = "blink">
+                        <h3>Waiting for users to Join your Game</h3>
+                        </div> 
                     </div>
                 </div>
             </div>
