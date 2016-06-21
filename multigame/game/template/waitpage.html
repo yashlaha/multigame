@@ -72,17 +72,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="intro-message">
-                        <h1>Multiplayer Battle</h1>
-                        <h3>A game all about reaction time</h3>
-                        <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <button class="btn btn-default btn-lg" id="begingame"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Start Game</span></button>
-                            </li>
-                            <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Join Game</span></a>
-                            </li>
-                        </ul>
+                        <div id="loading">
+                        <h4>Waiting for users to Join your Game</h4>
+                        </div>
+                        <div id="loading_image">
+                        <img src="{% static "img/loading.gif" %}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,67 +85,14 @@
         </div>
         <!-- /.container -->
 
-    </div>
-
-    <!--Modal for New Game starts here -->
-    <div class="modal fade" id="newGame" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" style = "color:white" data-dismiss="modal">&times;</button>
-          <h4>Start A New Game</h4>
-        </div>
-        <div class="modal-body">
-        <form action = "/game/adddata/" method= "POST">
-            
-            <h4> Enter your name : </h4>
-            <input type = "text" class = "form-control" name="player_name">
-        </div>
-        <div class="modal-body">
-          <h4>Select Grid Size : </h4>
-          <label>
-            <input type="radio" value=4 name="grid_size" />&nbsp;4 X 4</label>
-        <br>
-          <label>
-            <input type="radio" value=5 name="grid_size" />&nbsp;5 X 5</label>
-        <br>
-          <label>
-            <input type="radio" value=6 name="grid_size" />&nbsp;6 X 6</label>
-        </div>
-        <div class="modal-body">
-          <h4>Select your Color : </h4>
-          <label>
-            <input type="radio" value="red" name="color" />&nbsp;red</label>
-        <br>
-          <label>
-            <input type="radio" value="blue" name="color" />&nbsp;blue</label>
-        <br>
-          <label>
-            <input type="radio" value="green" name="color" />&nbsp;geen</label>
-        <br>
-          <label>
-            <input type="radio" value="yellow" name="color" />&nbsp;yellow</label>
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-default btn-lg" >Start Game</button>
-          <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">Close</button>
-        </div>
-        </form>
-      </div>
-      
-    </div>
-
-
-    <!--Modal for New Game starts here -->    
+    </div>    
 
     <!-- jQuery -->
     <script src="{% static "js/jquery.js" %}"></script>
     
     <!-- Bootstrap Core JavaScript -->
     <script src="{% static "js/bootstrap.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/game.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/wait_time.js" %}"></script>
 </body>
 
 </html>
