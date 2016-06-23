@@ -19,6 +19,7 @@
     <link href="{% static "css/landing-page.css" %}" rel="stylesheet">
     <link href="{% static "css/game-page.css" %}" rel="stylesheet">
     <link href="{% static "css/wait-page.css" %}" rel="stylesheet">
+    <link href="{% static "css/join-page.css" %}" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="{% static "font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
@@ -69,20 +70,24 @@
     <a name="about"></a>
     <div class="intro-header">
         <div class="container">
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <div id="loading" class = "blink">
-                        <h3>Waiting for users to Join your Game</h3>
-                        </div> 
-                    </div>
-                </div>
+          <h2>Active Games</h2>
+          {% for game in game_to_join %}
+          <div class="panel panel-default">
+            <div class="panel-body">
+                <form action = "/game/joinexistgame/" method = "POST">
+                <h5>Started by : {{game.owner}} , No. of Players : {{game.no_of_player}} , Grid Size = {{game.square}} X {{game.square}}
+                </h5>
+                <br>
+                <input type="text" class = "form-control" style = "width: 40%!important; margin-left: 326px!important " name="newuser" placeholder="Enter your name and Click on Join Game to join the game">
+                <input type= "hidden" value = {{game.gameid}} name = "gid">
+                <br>
+                <button type="submit" class="btn btn-default btn-lg" >Join Game</button>  
             </div>
-
+            </form>
+          </div>
+          {% endfor %}
         </div>
         <!-- /.container -->
-
     </div>    
 
     <!-- jQuery -->

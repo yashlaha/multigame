@@ -4,6 +4,7 @@ from django.db import models
 class Game(models.Model):
 	gameid = models.IntegerField()
 	square = models.IntegerField()
+	owner = models.CharField(max_length=100)
 	no_of_player = models.IntegerField(default = 0)
 	is_active = models.BooleanField(default = False)
 	is_completed = models.BooleanField(default = False)

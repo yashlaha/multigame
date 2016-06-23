@@ -80,7 +80,7 @@
                                 <button class="btn btn-default btn-lg" id="begingame"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Start Game</span></button>
                             </li>
                             <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Join Game</span></a>
+                                <a href="/game/joingame" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Join Game</span></a>
                             </li>
                         </ul>
                     </div>
@@ -103,35 +103,21 @@
           <h4>Start A New Game</h4>
         </div>
         <div class="modal-body">
-        <form action = "/game/adddata/" method= "POST">
+        <form action = "/game/startgame/" method= "POST">
             
             <h4> Enter your name : </h4>
-            <input type = "text" class = "form-control" name="player_name">
+            <input type = "text" class = "form-control" name="player_name" required>
         </div>
         <div class="modal-body">
           <h4>Select Grid Size : </h4>
           <label>
-            <input type="radio" value=4 name="grid_size" />&nbsp;4 X 4</label>
+            <input type="radio" value=4 name="grid_size" required />&nbsp;4 X 4</label>
         <br>
           <label>
-            <input type="radio" value=5 name="grid_size" />&nbsp;5 X 5</label>
+            <input type="radio" value=5 name="grid_size" required />&nbsp;5 X 5</label>
         <br>
           <label>
-            <input type="radio" value=6 name="grid_size" />&nbsp;6 X 6</label>
-        </div>
-        <div class="modal-body">
-          <h4>Select your Color : </h4>
-          <label>
-            <input type="radio" value="red" name="color" />&nbsp;red</label>
-        <br>
-          <label>
-            <input type="radio" value="blue" name="color" />&nbsp;blue</label>
-        <br>
-          <label>
-            <input type="radio" value="green" name="color" />&nbsp;geen</label>
-        <br>
-          <label>
-            <input type="radio" value="yellow" name="color" />&nbsp;yellow</label>
+            <input type="radio" value=6 name="grid_size" required />&nbsp;6 X 6</label>
         </div>
         <div class="modal-footer">
           <button type="submit" class="btn btn-default btn-lg" >Start Game</button>

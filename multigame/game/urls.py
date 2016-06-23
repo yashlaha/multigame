@@ -19,5 +19,8 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.index,name='index'),
-    url(r'^adddata/', views.addGame,name='addGame'),
+    url(r'^startgame/', views.addGame,name='startGame'),
+    url(r'^userjoin/', views.checkUser,name='checkUser'),
+    url(r'^joingame/', views.userJoin,name='userJoin'),
+    url(r'^joinexistgame/', views.existJoin,name='existJoin'),
 ]
