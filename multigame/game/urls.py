@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^userjoin/', views.checkUser,name='checkUser'),
     url(r'^joingame/', views.userJoin,name='userJoin'),
     url(r'^joinexistgame/', views.existJoin,name='existJoin'),
+    url(r'^arena/', views.buildArena,name='buildArena'),
+    url(r'^exit/', views.exitGame,name='exitGame'),
 ]
