@@ -3,6 +3,19 @@
     width: 80px;
     height: 80px;
     border: solid white;
-    border-width: 4px 4px 4px 4px;
-    
+    border-width: 4px 4px 4px 4px;  
+}
+
+.active_players{
+	position: absolute;
+    background-color: white;
+    left: 100px;
+    top: 236px;
+    width: 238px;
+    height: 276px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    color: black;
 }

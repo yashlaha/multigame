@@ -40,7 +40,7 @@ def checkUser(request):
 
 def userJoin(request):
     template = loader.get_template("game/template/game/joingame.html")
-    game_to_join = Game.objects.filter(is_completed = False)
+    game_to_join = Game.objects.filter(is_completed = False , no_of_player__range =(1,3))
     data = {'game_to_join':game_to_join}
     return HttpResponse(template.render(data,request))
 
