@@ -14,4 +14,10 @@ class UserProfile(models.Model):
 	userid = models.AutoField(primary_key=True)
 	username = models.CharField(max_length=200)
 	color = models.CharField(max_length=200)
+	score = models.IntegerField(default = 0)
 	challenge = models.ForeignKey(Game)
+
+class GameDetails(models.Model):
+	divs = models.CharField(max_length=100)
+	div_color = models.CharField(max_length=100 , default = "black")
+	gameref = models.ForeignKey(Game)

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.template import Context, loader
-from game.models import Game,UserProfile
+from game.models import *
 from django.core import serializers
 from django.http import JsonResponse
 import random
@@ -19,6 +19,7 @@ def index (request):
 def addGame(request):
 	username = request.POST['player_name']
 	gridsize = request.POST['grid_size']
+	loop = int(gridsize)
 	gameid = random.randint(1,1000000)
 	usercolor = random.choice(color_array)
 	print(usercolor)
@@ -52,7 +53,7 @@ def existJoin(request):
 	update_game.save()
 	newusercol = random.choice(color_array)
 	newfinalcol = pickdiffcolor(newusercol,gid)
-	print (newfinalcol)
+	#print (newfinalcol)
 	request.session['game_id'] = gid
 	request.session['user_color'] = newfinalcol
 	request.session['username'] = playername
@@ -74,6 +75,35 @@ def buildArena(request):
 	else:	
 		template = loader.get_template("game/template/game/arena.html")
 		return HttpResponse(template.render())
+
+def gameStatus(request):
+	if request.is_ajax():
+		grid_game_id = request.session['game_id']
+		game_data = Game.objects.get(gameid = grid_game_id)
+		status = game_data.is_active
+		data = {'status':status}
+		return HttpResponse(json.dumps(data), content_type='application/json')
+
+def changeStatus(request):
+	if request.is_ajax():
+		gid = request.session['game_id']
+		update_status = Game.objects.get(gameid = gid)
+		update_status.is_active = True
+		update_status.save()
+		data = {}
+		return JsonResponse(data)
+
+def updateScore(request):
+	if request.is_ajax():
+		divid = request.POST['id']
+		gameid = request.session['game_id']
+		usercol = request.session['user_color']
+		game_details_instance = GameDetails.objects.create(divs = divid , div_color = usercol , gameref =  Game.objects.get(gameid=gameid))
+		update_status = Game.objects.get(gameid = gameid)
+		update_status.is_active = False
+		update_status.save()
+		data = {}
+		return JsonResponse(data)
 
 def exitGame(request):
 	try:

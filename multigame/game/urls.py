@@ -24,5 +24,8 @@ urlpatterns = [
     url(r'^joingame/', views.userJoin,name='userJoin'),
     url(r'^joinexistgame/', views.existJoin,name='existJoin'),
     url(r'^arena/', views.buildArena,name='buildArena'),
+    url(r'^checkgamestatus/', views.gameStatus,name='gameStatus'),
+    url(r'^changegamestatus/', views.changeStatus,name='changeStatus'),
+    url(r'^updatescore/', views.updateScore,name='updateScore'),
     url(r'^exit/', views.exitGame,name='exitGame'),
 ]
