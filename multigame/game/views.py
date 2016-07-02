@@ -67,10 +67,8 @@ def buildArena(request):
 		print (grid_game_id)
 		game_data = Game.objects.filter(gameid = grid_game_id)
 		#square = game_data.square
-		player_data = UserProfile.objects.filter(challenge=Game.objects.get(gameid = grid_game_id))
 		game_details = serializers.serialize("json", game_data)
-		player_details = serializers.serialize("json", player_data)
-		data = {'game_details' : game_details , 'player_details' : player_details}
+		data = {'game_details' : game_details}
 		return JsonResponse(data)	
 	else:	
 		template = loader.get_template("game/template/game/arena.html")
@@ -81,7 +79,11 @@ def gameStatus(request):
 		grid_game_id = request.session['game_id']
 		game_data = Game.objects.get(gameid = grid_game_id)
 		status = game_data.is_active
-		data = {'status':status}
+		grid_view = GameDetails.objects.filter(gameref = Game.objects.get(gameid = grid_game_id))
+		grid_details = serializers.serialize("json", grid_view)
+		player_data = UserProfile.objects.filter(challenge=Game.objects.get(gameid = grid_game_id))
+		player_details = serializers.serialize("json", player_data)
+		data = {'status':status , 'grid_details' : grid_details , 'player_details' : player_details}
 		return HttpResponse(json.dumps(data), content_type='application/json')
 
 def changeStatus(request):
@@ -102,7 +104,7 @@ def updateScore(request):
 		update_status = Game.objects.get(gameid = gameid)
 		update_status.is_active = False
 		update_status.save()
-		data = {}
+		data = {'divid' : divid , 'usercol' : usercol}
 		return JsonResponse(data)
 
 def exitGame(request):

@@ -15,11 +15,26 @@ $(document).ready(function(){
 				console.log(game);
 				console.log(name);
 				console.log(pcount);
-				if(pcount > 1){
-					var seconds_left = 20;
+				if(pcount >2){
+					$("#loading").html('<h4>Wait for the next round</h4>');
+					$.ajax({
+					url: "/game/checkgamestatus/",
+					type : 'POST',
+					success : function(result){
+							if(result.status == true){
+								window.location = '/game/arena/';
+							}
+							else{
+								checkuserjoin();
+							}
+						}
+					});
+				}
+				else if(pcount == 2){
+					var seconds_left = 5;
 					var interval = setInterval(function() {
 						$("#loading").html('');
-						$("#timer_div").html('<h4>Your game will start in ' + --seconds_left + ' seconds');
+						$("#timer_div").html('<h4>Your game will start in ' + --seconds_left + ' seconds</h4>');
 					    if (seconds_left <= 0)
 					    {
 					        window.location = '/game/arena/';
