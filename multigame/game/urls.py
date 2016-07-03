@@ -27,5 +27,6 @@ urlpatterns = [
     url(r'^checkgamestatus/', views.gameStatus,name='gameStatus'),
     url(r'^changegamestatus/', views.changeStatus,name='changeStatus'),
     url(r'^updatescore/', views.updateScore,name='updateScore'),
+    url(r'^finaldisplay/', views.finalDisplay,name='finalDisplay'),
     url(r'^exit/', views.exitGame,name='exitGame'),
 ]

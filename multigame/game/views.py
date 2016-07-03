@@ -5,6 +5,7 @@ from django.template import Context, loader
 from game.models import *
 from django.core import serializers
 from django.http import JsonResponse
+from django.db.models import Max
 import random
 import json
 import socket
@@ -27,7 +28,8 @@ def addGame(request):
 	user_instance = UserProfile.objects.create(username = username ,color = usercolor , challenge = Game.objects.get(gameid=gameid))
 	request.session['game_id'] = gameid
 	request.session['user_color'] = usercolor
-	request.session['username'] = username	
+	request.session['username'] = username
+	request.session['gridsize'] = gridsize	
 	template = loader.get_template("game/template/game/waitpage.html")
 	return HttpResponse(template.render())
 
@@ -57,6 +59,7 @@ def existJoin(request):
 	request.session['game_id'] = gid
 	request.session['user_color'] = newfinalcol
 	request.session['username'] = playername
+	request.session['gridsize'] = update_game.square
 	user_instance = UserProfile.objects.create(username = playername ,color = newfinalcol , challenge = Game.objects.get(gameid=gid))
 	template = loader.get_template("game/template/game/waitpage.html")
 	return HttpResponse(template.render())
@@ -77,13 +80,17 @@ def buildArena(request):
 def gameStatus(request):
 	if request.is_ajax():
 		grid_game_id = request.session['game_id']
+		col = request.session['user_color']
 		game_data = Game.objects.get(gameid = grid_game_id)
 		status = game_data.is_active
 		grid_view = GameDetails.objects.filter(gameref = Game.objects.get(gameid = grid_game_id))
 		grid_details = serializers.serialize("json", grid_view)
 		player_data = UserProfile.objects.filter(challenge=Game.objects.get(gameid = grid_game_id))
 		player_details = serializers.serialize("json", player_data)
-		data = {'status':status , 'grid_details' : grid_details , 'player_details' : player_details}
+		playerscore = UserProfile.objects.get(challenge = Game.objects.get(gameid = grid_game_id) , color = col )
+		score = playerscore.score
+		gridsize = request.session['gridsize']
+		data = {'status':status , 'grid_details' : grid_details , 'player_details' : player_details , 'score' : score , 'gridsize' : gridsize}
 		return HttpResponse(json.dumps(data), content_type='application/json')
 
 def changeStatus(request):
@@ -100,11 +107,35 @@ def updateScore(request):
 		divid = request.POST['id']
 		gameid = request.session['game_id']
 		usercol = request.session['user_color']
-		game_details_instance = GameDetails.objects.create(divs = divid , div_color = usercol , gameref =  Game.objects.get(gameid=gameid))
-		update_status = Game.objects.get(gameid = gameid)
-		update_status.is_active = False
-		update_status.save()
-		data = {'divid' : divid , 'usercol' : usercol}
+		divcount = GameDetails.objects.filter(divs = divid , gameref =  Game.objects.get(gameid=gameid))
+		if (divcount.count() == 0):
+			game_details_instance = GameDetails.objects.create(divs = divid , div_color = usercol , gameref =  Game.objects.get(gameid=gameid))
+			update_status = Game.objects.get(gameid = gameid)
+			update_status.is_active = False
+			update_status.save()
+			update_player_score = UserProfile.objects.get(challenge= Game.objects.get(gameid = gameid) , color = usercol)
+			update_player_score.score += 1
+			update_player_score.save()
+			data = {'divid' : divid , 'usercol' : usercol}
+			return JsonResponse(data)
+		else:
+			data = {}
+			return JsonResponse(data)
+
+def finalDisplay(request):
+	if request.is_ajax():
+		gid = request.session['game_id']
+		col = request.session['user_color']
+		max_score = UserProfile.objects.filter(challenge= Game.objects.get(gameid = gid)).aggregate(Max('score'))['score__max']
+		allwinners = UserProfile.objects.filter(challenge= Game.objects.get(gameid = gid),score = max_score)
+		playerscore = UserProfile.objects.get(challenge = Game.objects.get(gameid = gid) , color = col )
+		score = playerscore.score
+		if (score == max_score):
+			your_res = "win"
+		else:
+			your_res = "no"
+		allwinners_details = serializers.serialize("json", allwinners)
+		data = {"allwin" : allwinners_details , "your_res" : your_res}
 		return JsonResponse(data)
 
 def exitGame(request):

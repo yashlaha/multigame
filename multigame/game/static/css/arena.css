@@ -1,3 +1,10 @@
+.result_table{
+    width: 60%;
+    margin-left: 20%;
+    vertical-align: center;
+    margin-top: 5%;
+}
+
 .board{
 	background: black;
     width: 80px;
@@ -12,13 +19,14 @@
     border: solid white;
     border-width: 4px 4px 4px 4px;  
 }
+
 .active_players{
 	position: absolute;
     background-color: white;
     left: 100px;
     top: 236px;
-    width: 238px;
-    height: 276px;
+    width: 248px;
+    height: 400px;
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
@@ -26,6 +34,19 @@
     color: black;
 }
 
+.your_score{
+    position: absolute;
+    background-color: white;
+    left: 1000px;
+    top: 236px;
+    width: 248px;
+    height: 400px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    color: black;
+}
 .modal {
     display:    none;
     position:   fixed;
@@ -39,7 +60,15 @@
                 50% 50% 
                 no-repeat;
 }
-
+.final_res{
+    display : none;
+    position: absolute;
+    left: 380px;
+    width: 500px;
+    height: 450px;
+    background-color: rgb(248, 248, 248);
+    top: 150px;
+}
 /* When the body has the loading class, we turn
    the scrollbar off with overflow:hidden */
 body.loading {
@@ -50,4 +79,9 @@ body.loading {
    modal element will be visible */
 body.loading .modal {
     display: block;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
 }
