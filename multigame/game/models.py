@@ -13,7 +13,7 @@ class Game(models.Model):
 class UserProfile(models.Model):
 	userid = models.AutoField(primary_key=True)
 	username = models.CharField(max_length=200)
-	color = models.CharField(max_length=200)
+	color = models.CharField(max_length=200 , default = "khaki")
 	score = models.IntegerField(default = 0)
 	challenge = models.ForeignKey(Game)
 

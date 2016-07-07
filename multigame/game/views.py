@@ -23,7 +23,7 @@ def addGame(request):
 	loop = int(gridsize)
 	gameid = random.randint(1,1000000)
 	usercolor = random.choice(color_array)
-	print(usercolor)
+	#print(usercolor)
 	game_instance = Game.objects.create(gameid = gameid ,square = gridsize , owner = username , no_of_player = 1)
 	user_instance = UserProfile.objects.create(username = username ,color = usercolor , challenge = Game.objects.get(gameid=gameid))
 	request.session['game_id'] = gameid
@@ -126,6 +126,9 @@ def finalDisplay(request):
 	if request.is_ajax():
 		gid = request.session['game_id']
 		col = request.session['user_color']
+		update_status = Game.objects.get(gameid = gid)
+		update_status.is_complete = False
+		update_status.save()
 		max_score = UserProfile.objects.filter(challenge= Game.objects.get(gameid = gid)).aggregate(Max('score'))['score__max']
 		allwinners = UserProfile.objects.filter(challenge= Game.objects.get(gameid = gid),score = max_score)
 		playerscore = UserProfile.objects.get(challenge = Game.objects.get(gameid = gid) , color = col )
