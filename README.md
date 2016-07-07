@@ -1,5 +1,11 @@
 # multigame
 
+
+### To run the game , clone the repository and open command window in the root folder (assuming that django/python is setup and installed in the PC)
+### go into the multigame folder using the command and then run the command <b> python manage.py runserver 127.0.0.0:8000 </b>
+### app willl be up and running on your ipserver on the link "ipaddress/game". for eg : 192.168.1.105:8000/game
+### other users can now join the game at this ip address.
+
 ##### The Game starts with the home screen where person can either start the game or join an existing Game.
 ##### The onne who creates the game can choose the grid size.
 ##### The maximum number of limit is set to 4 persons per game.
